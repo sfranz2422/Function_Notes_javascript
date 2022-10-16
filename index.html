@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Function Notes</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <script src="script.js"></script>  <h1 id="whitespace-execution-flow">Whitespace &amp; Execution Flow</h1>
+  <p>Consider our welcome function for our trip planning application:</p>
+  <pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trip_welcome</span><span class="hljs-params">()</span>:</span>
+  print(<span class="hljs-string">"Welcome to Tripcademy!"</span>) 
+  print(<span class="hljs-string">"Let's get you to your destination."</span>)
+</code></pre>
+  <p>The print statements all run together when <code>trip_welcome()</code> is called. This is because they have the
+    same base level of indentation (2 spaces).</p>
+  <mark><p>In Python, the amount of whitespace tells the computer what is part of a function and what is not part of that
+    function.</p></mark>
+  <p>If we wanted to write another statement outside of <code>trip_welcome()</code>, we would have to unindent the new
+    line:</p>
+  <pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trip_welcome</span><span class="hljs-params">()</span>:</span>
+  <span class="hljs-comment"># Indented code is part of the function body</span>
+  print(<span class="hljs-string">"Welcome to Tripcademy!"</span>) 
+  print(<span class="hljs-string">"Let's get you to your destination."</span>)
+
+<span class="hljs-comment"># Unindented code below is not part of the function body</span>
+print(<span class="hljs-string">"Woah, look at the weather outside! Don't walk, take the train!"</span>)
+
+trip_welcome()
+</code></pre>
+  <p>Our <code>trip_welcome()</code> function steps will not print Woah, look at the weather outside! Don&#39;t walk,
+    take the train! on our function call. The <code>print()</code>statement was unindented to show it was not a part of
+    the function body but rather a separate statement.</p>
+  <p>We would see the following output from this program:</p>
+  <pre><code>Woah, look at the weather outside! Don<span class="hljs-comment">'t walk, take the train!</span>
+Welcome <span class="hljs-keyword">to</span> Tripcademy!
+<span class="hljs-keyword">Let</span><span class="hljs-comment">'s get you to your destination.</span>
+</code></pre>
+  <p>Lastly, note that the execution of a program always begins on the first line. The code is then executed one line at
+    a time from top to bottom. This is known as execution flow and is the order a program in python executes code.</p>
+  <p>Woah, look at the weather outside! Don&#39;t walk, take the train! was printed before the
+    <code>print()</code>statements from the function <code>trip_welcome()</code>.</p>
+  <p>Even though our function was defined before our lone<code>print()</code>statement, we didn’t call our function
+    until after.</p>
+  <p>Let’s play around with indentation and the flow of execution!</p>
+  <h1 id="instructions">Instructions</h1>
+  <p>1.
+    We are going to help our trip planner users figure out if they should travel today based on the weather. Let’s let
+    our users know we can check the weather for them.</p>
+  <p>Write a<code>print()</code> statement that will output Checking the weather for you!.</p
+  <p>2.
+    We took a look outside and see a bright sunny day. Write a function called <code>weather_check()</code>that will
+    print a message to our users that it’s a great day to travel! The function should output:</p>
+  <p>Looks great outside! Enjoy your trip.
+    Note: Don’t call your function just yet! We will do that in the next step.</p>
+  <p>3.
+    Oh no! It looks like some clouds came in and it started raining. Our users shouldn’t go on a trip in the rain. In
+    our weather_check() function add a second <code>print()</code>statement under the first one which prints a warning
+    message for our travelers! It should print:</p>
+  <pre><code><span class="hljs-literal">False</span> Alarm, the weather changed! There <span class="hljs-keyword">is</span> a thunderstorm approaching. Cancel your plans <span class="hljs-keyword">and</span> stay inside.
+</code></pre>
+  <p>4.
+    Call the function <code>weather_check()</code>.</p>
+  <p>5.
+    Unindent your final print statement in your <code>weather_check()</code> function. Run the program again.</p>
+  <p>What is different?</p>
+
+<iframe width="100%" height="600px" src="https://replit.com/team/programming-1-period-1/Whitespace-and-Execution-Flow"></iframe>
+  
+  <h1 id="parameters-arguments">Parameters &amp; Arguments</h1>
+  <p>Let’s return to our trip_welcome() function one more time! Let’s modify our function to give a welcome that is a
+    bit more detailed.</p>
+  <pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trip_welcome</span><span class="hljs-params">()</span>:</span>
+  print(<span class="hljs-string">"Welcome to Tripcademy!"</span>) 
+  print(<span class="hljs-string">"Looks like you're going to Times Square today."</span>)
+
+trip_welcome()
+</code></pre>
+  <p>This will output:</p>
+  <pre><code>Welcome <span class="hljs-keyword">to</span> Tripcademy!
+Looks <span class="hljs-keyword">like</span> you<span class="hljs-comment">'re going to Times Square today.</span>
+</code></pre>
+  <p>Our function does a really good job of welcoming anyone who is traveling to Times Square but a really poor job if
+    they are going anywhere else. In order for us to make our function a bit more dynamic, we are going to use the
+    concept of function parameters.</p>
+  <mark><p>Function parameters allow our function to accept data as an input value. We list the parameters a function takes as
+    input between the parentheses of a function <code>( )</code>.</p></mark>
+  <p>Here is a function that defines a single parameter:</p>
+  <pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">my_function</span><span class="hljs-params">(single_parameter)</span></span>
+  <span class="hljs-comment"># some code</span>
+</code></pre>
+  <p>In the context of our trip_welcome() function, it would look like this:</p>
+  <pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trip_welcome</span><span class="hljs-params">(destination)</span>:</span>
+  print(<span class="hljs-string">"Welcome to Tripcademy!"</span>) 
+  print(<span class="hljs-string">"Looks like you're going to "</span> + destination + <span class="hljs-string">" today."</span>)
+</code></pre>
+  <p>In the above example, we define a single parameter called destination and apply it in our function body in the
+    second print statement. We are telling our function it should expect some data passed in for destination that it can
+    apply to any statements in the function body.</p>
+  <p>But how do we actually use this parameter? Our parameter of destination is used by passing in an argument to the
+    function when we call it.</p>
+  <pre><code><span class="hljs-function"><span class="hljs-title">trip_welcome</span><span class="hljs-params">(<span class="hljs-string">"Times Square"</span>)</span></span>
+</code></pre>
+  <p>This would output:</p>
+  <pre><code>Welcome <span class="hljs-keyword">to</span> Tripcademy!
+Looks <span class="hljs-keyword">like</span> you<span class="hljs-comment">'re going to Times Square today.</span>
+</code></pre>
+  <p>To summarize, here is a quick breakdown of the distinction between a parameter and an argument:</p>
+  <p>The parameter is the name defined in the parenthesis of the function and can be used in the function body.</p>
+  <p><img src="assets/pic.png" alt="pic"></p>
+  <p>The argument is the data that is passed in when we call the function and assigned to the parameter name.</p>
+  <p><img src="assets/pic2.png" alt="pic2"></p>
+  <h1 id="instructions">Instructions</h1>
+  <p>1.
+    We want to create a program that allows our users to generate the directions for their upcoming trip!</p>
+  <p>Create a function called <code>generate_trip_instructions()</code> that defines one parameter called location.</p>
+  <p>Note: Since we did not define any code in our function yet, we will receive an error in our output terminal. Don’t
+    worry, we will be filling in the code in the next step.</p>
+  <p>2.
+    <code>generate_trip_instructions()</code> should print out the following:
+  </p>
+  <pre><code>Looks like you are planning a trip <span class="hljs-keyword">to</span> visit &lt;<span class="hljs-built_in">location</span>&gt;
+Where &lt;<span class="hljs-built_in">location</span>&gt; will represent the <span class="hljs-built_in">location</span> parameter.
+</code></pre>
+  <p>3.
+    <code>generate_trip_instructions()</code>should also let our users know they can reach their location using public
+    transit.
+  </p>
+  <p>Let’s have <code>generate_trip_instructions()</code> also print out the following on a new line:</p>
+  <pre><code>You can <span class="hljs-keyword">use</span> the <span class="hljs-keyword">public</span> subway <span class="hljs-keyword">system</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">get</span> <span class="hljs-keyword">to</span> &lt;location&gt;
+<span class="hljs-keyword">Where</span> &lt;location&gt; will represent the location parameter.
+</code></pre>
+  <p>4.
+    Time for some greenery! Let’s see what happens when we call the function and input the argument
+    <code>&quot;Central Park&quot;</code>, a backyard wonder in the heart of New York City.</p>
+  <p>5.
+    The day trip is over and we need to get back to the train station to head home. Change the argument to
+    <code>&quot;Grand Central Station&quot;</code>and call the function again.</p>
+  <p>What changed in the output?</p>
+
+<iframe width="100%" height="600px" src="https://replit.com/team/programming-1-period-1/Parameters-and-Arguments"></iframe>
+
+
+  
+  <h1 id="multiple-parameters">Multiple Parameters</h1>
+  <p>Using a single parameter is useful but functions let us use as many parameters as we want! That way, we can pass in
+    more than one input to our functions.</p>
+  <mark><p>We can write a function that takes in more than one parameter by using commas:</p></mark>
+  <pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">my_function</span><span class="hljs-params">(parameter1, parameter2, parameter3)</span></span>:
+  <span class="hljs-comment"># Some code</span>
+</code></pre>
+  <p>When we call our function, we will need to provide arguments for each of the parameters we assigned in our function
+    definition.</p>
+  <pre><code class="lang-python"><span class="hljs-attr"># Calling my_function
+my_function(argument1</span>, argume<span class="hljs-symbol">nt2</span>)
+</code></pre>
+  <p>For example take our trip application’s trip_welcome() function that has two parameters:</p>
+  <pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trip_welcome</span><span class="hljs-params">(origin, destination)</span>:</span>
+  print(<span class="hljs-string">"Welcome to Tripcademy"</span>)
+  print(<span class="hljs-string">"Looks like you are traveling from "</span> + origin)
+  print(<span class="hljs-string">"And you are heading to "</span> + destination)
+</code></pre>
+  <p>Our two parameters in this function are origin and destination. In order to properly call our function, we need to
+    pass argument values for both of them.</p>
+  <p><mark>The ordering of your parameters is important as their position will map to the position of the arguments and will
+    determine their assigned value in the function body (more on this in the next exercise!).</mark></p>
+  <p>Our function call could look like:</p>
+  <pre><code class="lang-python"><span class="hljs-function"><span class="hljs-title">trip_welcome</span><span class="hljs-params">(<span class="hljs-string">"Prospect Park"</span>, <span class="hljs-string">"Atlantic Terminal"</span>)</span></span>
+</code></pre>
+  <p>In this call, the argument value of <code>&quot;Prospect Park&quot;</code> is assigned to be the origin parameter,
+    and the argument value of <code>&quot;Atlantic Terminal&quot;</code>is assigned to the destination parameter.</p>
+  <p>The output would be:</p>
+  <pre><code>Welcome <span class="hljs-keyword">to</span> Tripcademy
+Looks <span class="hljs-keyword">like</span> you are traveling <span class="hljs-keyword">from</span> Prospect Park
+<span class="hljs-keyword">And</span> you are heading <span class="hljs-keyword">to</span> Atlantic Terminal
+</code></pre>
+  <p>Let’s practice writing and calling a multiple parameter function!</p>
+  <h1 id="instructions">Instructions</h1>
+  <p>1.
+    Our travel application users want to calculate the total expenses they may have to incur on a trip.</p>
+  <p>Write a function called<code>calculate_expenses</code> that will have four parameters (in exact order):</p>
+  <pre><code><span class="hljs-attribute">plane_ticket_price</span>
+car_rental_rate
+hotel_rate
+trip_time
+</code></pre>
+  <p>Each of these parameters will account for a different expense that our users will incur.</p>
+  <p>Note: Like before, if we run this function now, we will get an error since there are no statements in the body.</p>
+  <p>2.
+    Within the body of the function, let’s start to make some calculations for our expenses. First, let’s calculate the
+    total price for a car rental.</p>
+  <p>Create new variable called <code>car_rental_total</code> that is the product of <code>car_rental_rate</code>and
+    <code>trip_time</code>.</p>
+  <p>3.
+    Next, we want to apply the same logic but for our hotel_rate.</p>
+  <p>Create new variable called <code>hotel_total</code> that is the product of <code>hotel_rate</code>and
+    <code>trip_time</code>.</p>
+  <p>We also have a coupon to give our users some cashback for their hotel visit so subtract 10 from that total in the
+    same statement. Woohoo, coupons! 💵</p>
+  <p>4.
+    Lastly, let’s print a nice message for our users to see the total. Use print to output the sum of
+    <code>car_rental_total</code>,<code>hotel_total</code> and <code>plane_ticket_price</code>.</p>
+  <p>5.
+    Call your function with the following argument values for the parameters listed:</p>
+  <pre><code><span class="hljs-string">plane_ticket_price :</span> <span class="hljs-number">200</span>
+<span class="hljs-string">car_rental_rate :</span> <span class="hljs-number">100</span>
+<span class="hljs-string">hotel_rate :</span> <span class="hljs-number">100</span>
+<span class="hljs-string">trip_time:</span> <span class="hljs-number">5</span>
+</code></pre>
+
+<iframe width="100%" height="600px" src="https://replit.com/team/programming-1-period-1/Multiple-Parameters"></iframe>
+
+  
+  <h1 id="types-of-arguments">Types of Arguments</h1>
+  <p>In Python, there are 3 different types of arguments we can give a function.</p>
+  <ul>
+    <li>
+      <p>Positional arguments: arguments that can be called by their position in the function definition.</p>
+    </li>
+    <li>
+      <p>Keyword arguments: arguments that can be called by their name.</p>
+    </li>
+    <li>
+      <p>Default arguments: arguments that are given default values.</p>
+    </li>
+  </ul>
+  <p>Positional Arguments are arguments we have already been using! Their assignments depend on their positions in the
+    function call. Let’s look at a function called calculate_taxi_price() that allows our users to see how much a taxi
+    would cost to their destination 🚕.</p>
+  <pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calculate_taxi_price</span><span class="hljs-params">(miles_to_travel, rate, discount)</span>:</span>
+  print(miles_to_travel * rate - discount )
+</code></pre>
+  <p>In this function, miles_to_travel is positioned as the first parameter, rate is positioned as the second parameter,
+    and discount is the third. When we call our function, the position of the arguments will be mapped to the positions
+    defined in the function declaration.</p>
+  <pre><code class="lang-python"># <span class="hljs-number">100</span> is miles_to_travel
+# <span class="hljs-number">10</span> is rate
+# <span class="hljs-number">5</span> is discount
+calculate_taxi_price(<span class="hljs-number">100</span>, <span class="hljs-number">10</span>, <span class="hljs-number">5</span>)
+</code></pre>
+  <p>Alternatively, we can use Keyword Arguments where we explicitly refer to what each argument is assigned to in the
+    function call. Notice in the code example below that the arguments do not follow the same order as defined in the
+    function declaration.</p>
+  <pre><code>calculate_taxi_price(rate=<span class="hljs-number">0.5</span>, discount=<span class="hljs-number">10</span>, miles_to_travel=<span class="hljs-number">100</span>)
+</code></pre>
+  <p>Lastly, sometimes we want to give our function arguments default values. We can provide a default value to an
+    argument by using the assignment operator (=). This will happen in the function declaration rather than the function
+    call.</p>
+  <p>Here is an example where the discount argument in our <code>calculate_taxi_price</code> function will always have a
+    default value of 10:</p>
+  <pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calculate_taxi_price</span><span class="hljs-params">(miles_to_travel, rate, discount = <span class="hljs-number">10</span>)</span>:</span>
+  print(miles_to_travel * rate - discount )
+</code></pre>
+  <p>When using a default argument, we can either choose to call the function without providing a value for a discount
+    (and thus our function will use the default value assigned) or overwrite the default argument by providing our own:
+  </p>
+  <pre><code class="lang-python"># Using the <span class="hljs-section">default</span> value of <span class="hljs-number">10</span> for discount.
+calculate_taxi_price(<span class="hljs-number">10</span>, <span class="hljs-number">0.5</span>)
+
+# Overwriting the <span class="hljs-section">default</span> value of <span class="hljs-number">10</span> with <span class="hljs-number">20</span>
+calculate_taxi_price(<span class="hljs-number">10</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">20</span>)
+</code></pre>
+  <h1 id="instructions">Instructions</h1>
+  <p>1.
+    Tripcademy (our trusty travel app) needs to allow passengers to plan a trip.</p>
+  <p>Write a function called <code>trip_planner()</code>that will have three parameters:
+    <code>first_destination</code>,<code>second_destination</code> and <code>final_destination</code>.</p>
+  <p>Give the <code>final_destination</code>parameter a default value of &quot;Codecademy HQ&quot;.</p>
+  <p>Note: Since we did not define any code in our function yet, we will receive an error in our output terminal. Don’t
+    worry, we will be filling in the code in the next step.</p>
+  <p>2.
+    First, we want to introduce the trip to users. Use <code>print()</code> in our function to output Here is what your
+    trip will look like!.</p>
+  <p>3.
+    In our function definition let’s provide an itinerary that will describe the destinations our user will visit in
+    order. Print a statement that follows this form:</p>
+  <pre><code>First, we will <span class="hljs-keyword">stop</span> in <span class="hljs-symbol">&lt;first_destination&gt;</span>, then <span class="hljs-symbol">&lt;second_destination&gt;</span>, <span class="hljs-built_in">and</span> lastly <span class="hljs-symbol">&lt;final_destination&gt;</span>
+</code></pre>
+  <p>An example call to our function using positional arguments:</p>
+  <pre><code><span class="hljs-function"><span class="hljs-title">trip_planner</span><span class="hljs-params">(<span class="hljs-string">"London"</span>, <span class="hljs-string">"India"</span>, <span class="hljs-string">"New Zealand"</span>)</span></span>
+</code></pre>
+  <p>Should output:</p>
+  <pre><code>Here <span class="hljs-keyword">is</span> what your trip will look <span class="hljs-keyword">like</span>!
+First, we will <span class="hljs-keyword">stop</span> <span class="hljs-keyword">in</span> London, <span class="hljs-keyword">then</span> India, <span class="hljs-keyword">and</span> lastly <span class="hljs-keyword">New</span> Zealand
+</code></pre>
+  <p>To test out your function, call <code>trip_planner()</code> with the following values for the parameters:</p>
+  <pre><code><span class="hljs-symbol">first_destination:</span> <span class="hljs-string">"France"</span>
+
+<span class="hljs-symbol">second_destination:</span> <span class="hljs-string">"Germany"</span>
+
+<span class="hljs-symbol">final_destination:</span> <span class="hljs-string">"Denmark"</span>
+</code></pre>
+  <p>4.
+    Call the function <code>trip_planner()</code> again with the following values for the parameters:</p>
+  <pre><code><span class="hljs-symbol">first_destination:</span> <span class="hljs-string">"Denmark"</span>
+
+<span class="hljs-symbol">second_destination:</span> <span class="hljs-string">"France"</span>
+
+<span class="hljs-symbol">final_destination:</span> <span class="hljs-string">"Germany"</span>
+</code></pre>
+  <p>Note the difference in your output depending on the position of your arguments.</p>
+  <p>5.
+    Call the function <code>trip_planner()</code> again using keyword arguments in this exact order:</p>
+  <pre><code><span class="hljs-symbol">first_destination:</span> <span class="hljs-string">"Iceland"</span>
+
+<span class="hljs-symbol">final_destination:</span> <span class="hljs-string">"Germany"</span>
+
+<span class="hljs-symbol">second_destination:</span> <span class="hljs-string">"India"</span>
+</code></pre>
+  <p>6.
+    Lastly, go ahead and call the function<code>trip_planner()</code>using only two positional arguments to see the
+    default argument in action:</p>
+  <pre><code><span class="hljs-symbol">first_destination:</span> <span class="hljs-string">"Brooklyn"</span>
+
+<span class="hljs-symbol">second_destination:</span> <span class="hljs-string">"Queens"</span>
+</code></pre>
+
+<iframe width="100%" height="600px" src="https://replit.com/team/programming-1-period-1/Multiple-Parameters"></iframe>
+
+  
+  <h1 id="built-in-functions-vs-user-defined-functions">Built-in Functions vs User Defined Functions</h1>
+  <p>There are two distinct categories for functions in the world of Python. What we have been writing so far in our
+    exercises are called User Defined Functions - functions that are written by users (like us!).</p>
+  <p>There is another category called Built-in functions - functions that come built into Python for us to use. Remember
+    when we were using print or str? Both of these functions are built into the language for us, which means we have
+    been using built-in functions all along!</p>
+  <p>There are lots of different built-in functions that we can use in our programs. Take a look at this example of
+    using len() to get the length of a string:</p>
+  <pre><code class="lang-python">destination_name = <span class="hljs-string">"Venkatanarasimharajuvaripeta"</span>
+
+# Built-<span class="hljs-keyword">in</span> <span class="hljs-function"><span class="hljs-keyword">function</span>: <span class="hljs-title">len</span><span class="hljs-params">()</span></span>
+length_of_destination = len(destination_name)
+
+# Built-<span class="hljs-keyword">in</span> <span class="hljs-function"><span class="hljs-keyword">function</span>: <span class="hljs-title">print</span><span class="hljs-params">()</span></span>
+<span class="hljs-built_in">print</span>(length_of_destination)
+</code></pre>
+  <p>Would output the value of length_of_destination:</p>
+  <pre><code><span class="hljs-number">28</span>
+</code></pre>
+  <p>Here we are using a total of two built-in functions in our example: <code>print()</code>, and <code>len()</code>.
+  </p>
+  <p>And yes, if you’re wondering, that is a real railway station in India!</p>
+  <p>There are even more obscure ones like<code>help()</code> where Python will print a link to documentation for us and
+    provide some details:</p>
+  <pre><code class="lang-python"><span class="hljs-function"><span class="hljs-title">help</span><span class="hljs-params">(<span class="hljs-string">"string"</span>)</span></span>
+</code></pre>
+  <p>Would output (shortened for readability):</p>
+  <pre><code>NAME
+    <span class="hljs-keyword">string</span> - A collection <span class="hljs-keyword">of</span> <span class="hljs-keyword">string</span> constants.
+
+MODULE REFERENCE
+    <span class="hljs-keyword">https</span>://docs.python.org/<span class="hljs-number">3.8</span>/library/<span class="hljs-keyword">string</span>
+
+    The following documentation is automatically generated <span class="hljs-built_in">from</span> <span class="hljs-keyword">the</span> Python
+    source <span class="hljs-built_in">files</span>.  It may be incomplete, incorrect <span class="hljs-keyword">or</span> <span class="hljs-built_in">include</span> features that
+    are considered implementation detail <span class="hljs-keyword">and</span> may vary between Python
+    implementations.  When <span class="hljs-keyword">in</span> doubt, consult <span class="hljs-keyword">the</span> module reference <span class="hljs-keyword">at</span> <span class="hljs-keyword">the</span>
+    location listed above.
+.....
+</code></pre>
+  <p>Let’s practice using a few built in functions. You will need to rely on the provided Python documentation links to
+    find your answers!</p>
+  <p><a href="https://docs.python.org/3/library/functions.html">official Python docs</a></p>
+  <h1 id="instructions">Instructions</h1>
+  <p>1.
+    We were provided a list of prices for some gift shop items:</p>
+  <pre><code><span class="hljs-selector-tag">T-shirt</span>: 9<span class="hljs-selector-class">.75</span>
+<span class="hljs-selector-tag">Shorts</span>: 15<span class="hljs-selector-class">.50</span>
+<span class="hljs-selector-tag">Mug</span>: 5<span class="hljs-selector-class">.99</span>
+<span class="hljs-selector-tag">Poster</span>: 2<span class="hljs-selector-class">.00</span>
+</code></pre>
+  <p>Create a variable called <code>max_price</code> and call the built-in function <code>max()</code> with the
+    variables of prices to get the maximum price.</p>
+  <p>Print<code>max_price</code>.</p>
+  <p>2.
+    Using the same set of prices, create a new variable called<code>min_price</code>and use the built-in
+    function<code>min()</code> with the variables of prices to get the minimum price.</p>
+  <p>Print <code>min_price</code>.</p>
+  <p>3.
+    Use the built-in function <code>round()</code> to round the price of the variable <code>tshirt_price</code>by one
+    decimal place.</p>
+  <p>Save the result to a variable called <code>rounded_price</code> and print it.</p>
+
+
+<iframe width="100%" height="600px" src="https://replit.com/team/programming-1-period-1/Built-in-Functions-vs-User-Defined-Functions"></iframe>
+  
+  <h1 id="variable-access">Variable Access</h1>
+  <p>As we expand our programs with more functions, we might start to ponder, where exactly do we have access to our
+    variables? To examine this, let’s revisit a modified version of the first function we built out together:</p>
+  <pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trip_welcome</span><span class="hljs-params">(destination)</span>:</span>
+  print(<span class="hljs-string">" Looks like you're going to the "</span> + destination + <span class="hljs-string">" today. "</span>)
+</code></pre>
+  <p>What if we wanted to access the variable destination outside of the function? Could we use it? Take a second to
+    think about what the following program will output, then check the result below!</p>
+  <pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trip_welcome</span><span class="hljs-params">(destination)</span>:</span>
+  print(<span class="hljs-string">" Looks like you're going to the "</span> + destination + <span class="hljs-string">" today. "</span>)
+
+print(destination)
+</code></pre>
+  <pre><code>NameError: <span class="hljs-keyword">name</span> <span class="hljs-string">'destination'</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> defined
+</code></pre>
+  <p>If we try to run this code, we will get a<code>NameError</code>, telling us that destination is not defined. The
+    variable <code>destination</code> has only been defined inside the space of a function, so it does not exist outside
+    the function.</p>
+  <p>We call the part of a program where destination can be accessed its scope. The scope of destination is only inside
+    the<code>trip_welcome()</code>.</p>
+  <p>Take a look at another example:</p>
+  <pre><code class="lang-python">budget = <span class="hljs-number">1000</span>
+
+<span class="hljs-comment"># Here we are using a default value for our parameter of `destination` </span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trip_welcome</span><span class="hljs-params">(destination=<span class="hljs-string">"California"</span>)</span>:</span>
+    print(<span class="hljs-string">" Looks like you're going to "</span> + destination)
+    print(<span class="hljs-string">" Your budget for this trip is "</span> + str(budget))
+
+print(budget)
+trip_welcome()
+</code></pre>
+  <p>Our output would be:</p>
+  <pre><code><span class="hljs-number">1000</span>
+
+Looks <span class="hljs-keyword">like</span> you<span class="hljs-comment">'re going to California </span>
+Your budget <span class="hljs-keyword">for</span> this trip <span class="hljs-keyword">is</span> <span class="hljs-number">1000</span>
+</code></pre>
+  <p>Here we are able to access the budget both inside the<code>trip_welcome</code>function as well as our
+    <code>print()</code> statement. If a variable lives outside of any function it can be accessed anywhere in the file.
+  </p>
+  <p>We will be exploring the concept of scope more after this entire lesson but for now, let’s play around!</p>
+  <h1 id="instructions">Instructions</h1>
+  <p>1.
+    Our users want to be able to save a list of their favorite places in our travel application.</p>
+  <p>We have received a rough draft for this implementation from another coder, but there are some problems with
+    variable scope which prevent it from working properly.</p>
+  <p>Take a second to understand what the program is doing and then hit Run the code to see the error.</p>
+  <p>2.
+    Looking at the error, it seems like the main issue is that <code>favorite_locations</code> is not defined. Why would
+    our program not be able to see our beautiful <code>favorite_locations</code> variable?</p>
+  <p>Aha! It must be a scope issue. Fix the scope of <code>favorite_locations</code> so that both our functions can
+    access it.</p>
+  <pre><code>Traceback (most recent <span class="hljs-keyword">call</span> <span class="hljs-keyword">last</span>):
+  <span class="hljs-keyword">File</span> <span class="hljs-string">"travel.py"</span>, line <span class="hljs-number">11</span>, <span class="hljs-keyword">in</span> &lt;<span class="hljs-keyword">module</span>&gt;
+    show_favorite_locations()
+  <span class="hljs-keyword">File</span> <span class="hljs-string">"travel.py"</span>, line <span class="hljs-number">8</span>, <span class="hljs-keyword">in</span> show_favorite_locations
+    print(<span class="hljs-string">"Your favorite locations are: "</span> + favorite_locations)
+NameError: <span class="hljs-keyword">name</span> <span class="hljs-string">'favorite_locations'</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> defined
+</code></pre>
+
+<iframe width="100%" height="600px" src="https://replit.com/team/programming-1-period-1/Variable-Access"></iframe>
+  
+  <h1 id="returns">Returns</h1>
+  <p>At this point, our functions have been using print() to help us visualize the output in our interpreter. Functions
+    can also return a value to the program so that this value can be modified or used later. We use the Python keyword
+    return to do this.</p>
+  <p>Here’s an example of a program that will return a converted currency for a given location a user may want to visit
+    in our trip planner application.</p>
+  <pre><code class="lang-python">def calculate_exchange_usd(us_dollars, exchange_rate):<span class="hljs-type"></span>
+  <span class="hljs-keyword">return</span> us_dollars * exchange_rate
+
+<span class="hljs-keyword">new</span><span class="hljs-type">_zealand_exchange</span> = calculate_exchange_usd(<span class="hljs-number">100</span>, <span class="hljs-number">1.4</span>)
+
+print(<span class="hljs-string">"100 dollars in US currency would give you "</span> + str(<span class="hljs-keyword">new</span><span class="hljs-type">_zealand_exchange</span>) + <span class="hljs-string">" New Zealand dollars"</span>)
+</code></pre>
+  <p>This would output:</p>
+  <pre><code><span class="hljs-symbol">100 </span>dollars in US currency would give you <span class="hljs-number">140</span> <span class="hljs-keyword">New</span> Zealand dollars
+</code></pre>
+  <p>Saving our values returned from a function like we did with <code>new_zealand_exchange</code> allows us to reuse
+    the value (in the form of a variable) throughout the rest of the program.</p>
+  <p>When there is a result from a function that is stored in a variable, it is called a returned function value.</p>
+  <p>Let’s try to return some data in the exercises!</p>
+  <p>Note: Working with multiple functions can be a bit overwhelming at first. Don’t hesitate to use hints or even look
+    at the solution code if you get stuck.</p>
+  <h1 id="instructions">Instructions</h1>
+  <p>1.
+    Our travel application is getting really popular. Some of our users have posted on social media that it would be
+    useful if our application could help them track their budget during trips. We want to help them track their starting
+    budget and let them know how much they have left after an expense.</p>
+  <p>We have provided some starting code to get started. Take a second to understand the code and then click Run and
+    take a look at the output.</p>
+  <p>2.
+    Let’s create a new function called <code>deduct_expense()</code> that will take two parameters.</p>
+  <p>The first parameter will be <code>budget</code> and the second parameter will be <code>expense</code>. Our function
+    will be taking in a budget value as well as the expense we want to subtract.</p>
+  <p>We will want our function to return the budget minus the expense our travelers are incurring.</p>
+  <p>3.
+    Looks like the most common expense our travelers are incurring is a t-shirt purchase.</p>
+  <p>Let’s create a variable called<code>shirt_expense</code> and for now, we will give it a set value of 9 (We are not
+    accounting for currency changes at the moment). Make sure this is defined outside of the functions in your script.
+  </p>
+  <p>4.
+    Now that we have an expense to subtract, create a new variable called <code>new_budget_after_shirt</code>and set it
+    to be the function call of <code>deduct_expense()</code>.</p>
+  <p>Pass our <code>current_budget</code> variable as the first argument and the <code>shirt_expense</code>variable as
+    the second argument.</p>
+  <p>5.
+    Lastly, we want our users to see the remaining budget.</p>
+  <p>Call the provided <code>print_remaining_budget()</code> function, passing in <code>new_budget_after_shirt</code>as
+    the only argument.</p>
+  <p>6.
+    Great Job! This is the biggest program with functions we have built so far! Take a second to review your code and
+    click Run one last time when you are ready to move on.</p>
+<iframe width="100%" height="600px" src="https://replit.com/team/programming-1-period-1/Returns"></iframe>
+
+  
+  <h1 id="multiple-returns">Multiple Returns</h1>
+  <p>Sometimes we may want to return more than one value from a function. We can return several values by separating
+    them with a comma. Take a look at this example of a function that allows users in our travel application to check
+    the upcoming week’s weather (starting on Monday):</p>
+  <pre><code class="lang-python">weather_data = [<span class="hljs-string">'Sunny'</span>, <span class="hljs-string">'Sunny'</span>, <span class="hljs-string">'Cloudy'</span>, <span class="hljs-string">'Raining'</span>, <span class="hljs-string">'Snowing'</span>]
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">threeday_weather_report</span><span class="hljs-params">(weather)</span></span>:
+  first_day = <span class="hljs-string">" Tomorrow the weather will be "</span> + weather[<span class="hljs-number">0</span>]
+  second_day = <span class="hljs-string">" The following day it will be "</span> + weather[<span class="hljs-number">1</span>]
+  third_day = <span class="hljs-string">" Two days from now it will be "</span> + weather[<span class="hljs-number">2</span>]
+  <span class="hljs-keyword">return</span> first_day, second_day, third_day
+</code></pre>
+  <p>This function takes in a set of data in the form of a list for the upcoming week’s weather. We can get our returned
+    function values by assigning them to variables when we call the function:</p>
+  <pre><code>monday, tuesday, wednesday = threeday_weather_report(weather_data)
+
+<span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(monday)</span></span>
+<span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(tuesday)</span></span>
+<span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(wednesday)</span></span>
+</code></pre>
+  <p>This will print:</p>
+  <pre><code><span class="hljs-symbol">Tomorrow</span> the weather will <span class="hljs-keyword">be </span>Sunny
+<span class="hljs-symbol">The</span> following day <span class="hljs-keyword">it </span>will <span class="hljs-keyword">be </span>Sunny
+<span class="hljs-symbol">Two</span> days from now <span class="hljs-keyword">it </span>will <span class="hljs-keyword">be </span>Cloudy
+</code></pre>
+  <p>Let’s practice using multiple returns by returning to our previous code example.</p>
+  <h1 id="instructions">Instructions</h1>
+  <p>1.
+    Our users liked the previous functionality that we added to our travel application, but recently we have had an
+    influx of users planning trips in Italy. We want to create a small function to output the top places to visit in
+    Italy. Another member of our team already started on the implementation of this feature but it is still missing a
+    few key details.</p>
+  <p>Take a second to review the code and click Run when you are ready to move on. For now, there will be no output.</p>
+  <p>2.
+    We want to be able to return the three most popular destinations from our function
+    <code>top_tourist_locations_italy()</code>.</p>
+  <p>Add a line in the function <code>top_tourist_locations_italy()</code> that will return the values of
+    <code>first</code>,<code>second</code>, <code>third</code> in that exact order.</p>
+  <p>3.
+    In order to use our three returned values from <code>top_tourist_locations_italy()</code> we need to assign them to
+    new variables names after we call our function.</p>
+  <p>Set the return of the function<code>top_tourist_locations_italy()</code> to be equal to three new variables
+    called<code>most_popular1</code>, <code>most_popular2</code>, and <code>most_popular3</code>in that exact order.</p>
+  <p>4.
+    Use three <code>print()</code> statements to output the value of <code>most_popular1</code>,
+    <code>most_popular2</code>, and <code>most_popular3</code>.</p>
+
+
+<iframe width="100%" height="600px" src="https://replit.com/team/programming-1-period-1/Multiple-Returns"></iframe>
+
+  
+</body>
+
+</html>
